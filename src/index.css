@@ -1,0 +1,132 @@
+@import url("https://fonts.googleapis.com/css2?family=Mukta:wght@200;300;400;500;600;700;800&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Signika+Negative:wght@300..700&family=Tektur:wght@400..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  /* font */
+  --font-poppins: "Poppins", sans-serif;
+  --font-signika: "Signika Negative", sans-serif;
+  --font-mukta: "Mukta", sans-serif;
+  --font-tektur: "Tektur", sans-serif;
+
+  /* dark */
+  /* --color-darkbg: #040404; */
+  --color-darkbgBlues: #0d1117;
+  --color-darkbgGray: #1e1e1e;
+  --color-darkbgNavy: #121a26;
+  --color-darkbgblue: #00071e;
+  --color-darkbg: #11416b;
+  --color-darkBlue: #041340;
+  --color-darkPurple: #290773;
+  --color-secondaryDarkBg: #041a59;
+
+  /* light */
+  --color-lightbg: #041a59;
+  --color-lightPurple: #5505a6;
+  --color-lightBlue: #0a58bf;
+
+  /* text */
+  --color-aliceBlue: #f0f8ff;
+
+  /* animate */
+  --animate-shine: shine 3s linear infinite;
+  @keyframes shine {
+    0% {
+      background-position: 100%;
+    }
+    100% {
+      background-position: -100%;
+    }
+  }
+}
+
+@layer components {
+  /* animation text shine */
+  @keyframes text {
+    0% {
+      background-position: 100%;
+    }
+    100% {
+      background-position: -100%;
+    }
+  }
+  .highlight-text {
+    background-image: linear-gradient(
+      120deg,
+      transparent 40%,
+      #06b6d4 50%,
+      transparent 60%
+    );
+    background-size: 200% 100%;
+    background-clip: text;
+    animation: text 2s linear infinite;
+  }
+
+  /* sprite */
+  .sprite {
+    width: 48px;
+    height: 48px;
+    background-size: cover;
+  }
+
+  /* step */
+  .step-4 {
+    animation: step4 0.7s steps(4) infinite;
+  }
+  @keyframes step4 {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: -192px 0;
+    }
+  }
+  .step-6 {
+    animation: step6 1s steps(6) infinite;
+  }
+  @keyframes step6 {
+    from {
+      background-position: 0 0;
+    }
+    to {
+      background-position: -288px 0;
+    }
+  }
+  /*===================== animal */
+  /* cat */
+  .cat-idle {
+    background: url(./assets/cat-pixel/Idle.png) no-repeat;
+  }
+  /* squid */
+  .squid-idle {
+    background-image: url(./assets/pixel/squid/Idle.png);
+  }
+  /* fish */
+  .fish-idle {
+    background-image: url(./assets/pixel/fish/Idle.png);
+  }
+  .fish-walk {
+    background-image: url(./assets/pixel/fish/Walk.png);
+  }
+  /* dog */
+  .dog-idle {
+    background-image: url(./assets/pixel/dog/Idle.png);
+  }
+  .dog-attack {
+    background-image: url(./assets/pixel/dog/Attack.png);
+  }
+}
+
+.custom-scrollbar {
+  scrollbar-gutter: stable;
+}
+.custom-scrollbar::-webkit-scrollbar {
+  width: 5px;
+  height: 10px;
+}
+.custom-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(56, 189, 248, 0.5);
+  border-radius: 1000px;
+}
