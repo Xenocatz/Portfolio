@@ -110,7 +110,7 @@ export default function Midnight() {
           }}
         />
       ))}
-      <div className="absolute bottom-10 scale-150 left-45 sprite dog-idle step-4 brightness-70" />
+      <div className="absolute bottom-10 scale-150 left-45 sprite dog-attack step-4 brightness-70" />
     </section>
   );
 }
