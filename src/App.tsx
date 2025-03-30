@@ -4,6 +4,7 @@ import gsap from "gsap";
 import HeroSection from "./Component/Layout/HeroSection";
 import WelcomeSection from "./Component/Layout/WelcomeSection";
 import NavBar from "./Component/Layout/NavBar";
+import Lenis from "lenis";
 
 function App() {
   const [loading, setLoading] = useState(true);
@@ -18,11 +19,30 @@ function App() {
         ease: "power1.inOut",
         onComplete: () => {
           setLoading(false);
-          console.log("loading selesai");
         },
       });
     }, 2000);
     return () => clearTimeout(timeout);
+  }, []);
+
+  // lenis
+  useEffect(() => {
+    if (!scrollerRef.current) return;
+    const lenis = new Lenis({
+      smoothWheel: true,
+      lerp: 0.1,
+      wrapper: scrollerRef.current,
+    });
+
+    function raf(time: number) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
   }, []);
   return (
     <>
@@ -30,7 +50,7 @@ function App() {
         <div
           ref={scrollerRef}
           className={`relative h-full custom-scrollbar ${
-            loading ? "overflow-hidden" : "overflow-y-auto"
+            loading ? "overflow-hidden" : "overflow-y-scroll"
           }`}
         >
           {/* loading page awal */}
