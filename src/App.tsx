@@ -1,8 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import LogoMain from "./Component/Layout/LogoMain";
 import gsap from "gsap";
-import HeroSection from "./Component/Layout/HeroSection";
-import WelcomeSection from "./Component/Layout/WelcomeSection";
+import Home from "./page/Home";
 import NavBar from "./Component/Layout/NavBar";
 import Lenis from "lenis";
 
@@ -10,6 +9,7 @@ function App() {
   const [loading, setLoading] = useState(true);
   const loadingRef = useRef<HTMLDivElement>(null);
   const scrollerRef = useRef<HTMLDivElement>(null);
+  const lenisRef = useRef<Lenis | null>(null);
 
   useEffect(() => {
     const timeout = setTimeout(() => {
@@ -19,31 +19,35 @@ function App() {
         ease: "power1.inOut",
         onComplete: () => {
           setLoading(false);
+          // lenis initialization moved outside
+          if (scrollerRef.current) {
+            let lenis = lenisRef.current;
+            lenis = new Lenis({
+              smoothWheel: true,
+              lerp: 0.1,
+              wrapper: scrollerRef.current,
+            });
+
+            function raf(time: number) {
+              lenis?.raf(time);
+              requestAnimationFrame(raf);
+            }
+            requestAnimationFrame(raf);
+
+            // Cleanup logic moved to useEffect cleanup
+            useEffect(() => {
+              return () => lenis.destroy();
+            }, []);
+          }
         },
       });
     }, 2000);
-    return () => clearTimeout(timeout);
-  }, []);
-
-  // lenis
-  useEffect(() => {
-    if (!scrollerRef.current) return;
-    const lenis = new Lenis({
-      smoothWheel: true,
-      lerp: 0.1,
-      wrapper: scrollerRef.current,
-    });
-
-    function raf(time: number) {
-      lenis.raf(time);
-      requestAnimationFrame(raf);
-    }
-    requestAnimationFrame(raf);
-
     return () => {
-      lenis.destroy();
+      clearTimeout(timeout);
+      lenisRef.current?.destroy();
     };
   }, []);
+
   return (
     <>
       <main className="bg-radial-[at_50%_-50%] from-darkBlue to-darkbgblue to-90% h-screen pr-[5px] ">
@@ -59,10 +63,8 @@ function App() {
           </div>
           {/* NavBar */}
           <NavBar scrollerRef={scrollerRef} />
-          {/* welcome section */}
-          <WelcomeSection />
-          {/* hero section */}
-          <HeroSection />
+          {/* Home */}
+          <Home />
         </div>
       </main>
     </>
