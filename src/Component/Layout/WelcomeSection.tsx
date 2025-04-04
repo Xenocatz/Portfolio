@@ -16,7 +16,11 @@ export default function WelcomeSection() {
   const subtextRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const tl = gsap.timeline();
+    const tl = gsap.timeline({
+      onComplete: () => {
+        console.log("has animated");
+      },
+    });
     tl.set(
       [
         nightCityRef.current,
@@ -45,7 +49,7 @@ export default function WelcomeSection() {
           duration: 0.5,
           ease: "power4.out",
         },
-        "start+=3"
+        "start+=0.5"
       )
       .to(
         nightCityRef.current,
@@ -56,7 +60,7 @@ export default function WelcomeSection() {
           duration: 4,
           ease: "power4.out",
         },
-        "start+=3"
+        "start+=0.5"
       )
       .to(
         asset1Ref.current,
@@ -67,7 +71,7 @@ export default function WelcomeSection() {
           duration: 4,
           ease: "power4.out",
         },
-        "start+=3"
+        "start+=0.5"
       )
       .to(
         UnderwaterRef.current,
@@ -78,7 +82,7 @@ export default function WelcomeSection() {
           duration: 4,
           ease: "power4.out",
         },
-        "start+=3"
+        "start+=0.5"
       )
       .to(
         asset2Ref.current,
@@ -89,7 +93,7 @@ export default function WelcomeSection() {
           duration: 5,
           ease: "power4.out",
         },
-        "start+=3"
+        "start+=0.5"
       )
       .to(
         midnightRef.current,
@@ -100,7 +104,7 @@ export default function WelcomeSection() {
           duration: 5,
           ease: "power4.out",
         },
-        "start+=2.5"
+        "start"
       )
       .fromTo(
         textRef.current,
@@ -114,7 +118,7 @@ export default function WelcomeSection() {
           duration: 1,
           ease: "power1.out",
         },
-        "start+=3.5"
+        "start+=1"
       )
       .fromTo(
         Array.from(subtextRef.current?.children || []),
@@ -126,7 +130,7 @@ export default function WelcomeSection() {
           duration: 0.5,
           ease: "power1.out",
         },
-        "start+=4"
+        "start+=1.5"
       );
   });
   return (

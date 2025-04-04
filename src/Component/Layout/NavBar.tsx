@@ -1,4 +1,4 @@
-import { Link } from "react-router";
+import { Link, useLocation } from "react-router";
 import SplitText from "../element/SplitText";
 import { useRef } from "react";
 import gsap from "gsap";
@@ -20,8 +20,8 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
     const tl = gsap.timeline();
     tl.set(headerRef.current, { opacity: 0 })
       .set(navRef.current, { opacity: 0.5, scaleX: 0 })
-      .set(buttonRef.current, { opacity: 0, y: 50 })
-      .to(headerRef.current, { opacity: 1 }, "+=3")
+      .set(buttonRef.current, { opacity: 0, y: 10 })
+      .to(headerRef.current, { opacity: 1 })
       .addLabel("navItems")
       .to(
         navRef.current,
@@ -32,7 +32,7 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
           duration: 1,
           ease: "back.inOut",
         },
-        "navItems+=1"
+        "navItems"
       )
       .fromTo(
         listRef.current?.children || [],
@@ -62,7 +62,7 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
 
           ease: "power1.out",
         },
-        "navItems+=1.5"
+        "navItems+=0.5"
       )
       .to(iconRef.current, { x: 0, duration: 1, ease: "back.inOut" }, "<+=0.5")
       .fromTo(
@@ -75,12 +75,12 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
           duration: 2.5,
           ease: "back.out",
         },
-        "navItems+=1.5"
+        "navItems+=0.5"
       )
       .to(
         buttonRef.current,
         { opacity: 1, y: 0, duration: 1, ease: "back.out" },
-        "navItems+=2"
+        "navItems+=1.9"
       );
   }, []);
   useGSAP(() => {
@@ -120,7 +120,7 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
               textClassName="text-2xl font-mukta font-base"
               animationDuration={0.5}
               stagger={0.1}
-              delay={6}
+              delay={2}
               ease="back.out"
             >
               LoneCatz
@@ -128,13 +128,13 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
           </div>
           <nav
             ref={navRef}
-            className="bg-black/10 backdrop-blur-xs p-3 border-x border-cyan-700/80 rounded-lg"
+            className="bg-black/10 backdrop-blur-xs p-3 border-x-2 border-cyan-700/80 rounded"
           >
             <ul ref={listRef} className="flex gap-10">
-              <NavElement text="Home" to="/" active />
-              <NavElement text="About" to="/" />
-              <NavElement text="Projects" to="/" />
-              <NavElement text="Contact" to="/" />
+              <NavElement text="Home" to="/" />
+              <NavElement text="About" to="/about" />
+              <NavElement text="Projects" to="/project" />
+              <NavElement text="Contact" to="/contact" />
             </ul>
           </nav>
           {/* download resume */}
@@ -153,15 +153,8 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
   );
 }
 
-const NavElement = ({
-  text,
-  to,
-  active,
-}: {
-  text: string;
-  to: string;
-  active?: boolean;
-}) => {
+const NavElement = ({ text, to }: { text: string; to: string }) => {
+  const active = useLocation().pathname === to;
   return (
     <li
       className={`cursor-pointer flex gap-2 justify-center items-center ${
