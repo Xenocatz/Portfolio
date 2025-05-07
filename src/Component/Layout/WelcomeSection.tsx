@@ -33,7 +33,7 @@ export default function WelcomeSection() {
         opacity: 0,
         yPercent: 270,
         scaleY: 1.2,
-      }
+      },
     )
       .addLabel("start")
       .to(
@@ -49,7 +49,7 @@ export default function WelcomeSection() {
           duration: 0.5,
           ease: "power4.out",
         },
-        "start+=0.5"
+        "start+=0.5",
       )
       .to(
         nightCityRef.current,
@@ -60,7 +60,7 @@ export default function WelcomeSection() {
           duration: 4,
           ease: "power4.out",
         },
-        "start+=0.5"
+        "start+=0.5",
       )
       .to(
         asset1Ref.current,
@@ -71,7 +71,7 @@ export default function WelcomeSection() {
           duration: 4,
           ease: "power4.out",
         },
-        "start+=0.5"
+        "start+=0.5",
       )
       .to(
         UnderwaterRef.current,
@@ -82,7 +82,7 @@ export default function WelcomeSection() {
           duration: 4,
           ease: "power4.out",
         },
-        "start+=0.5"
+        "start+=0.5",
       )
       .to(
         asset2Ref.current,
@@ -93,7 +93,7 @@ export default function WelcomeSection() {
           duration: 5,
           ease: "power4.out",
         },
-        "start+=0.5"
+        "start+=0.5",
       )
       .to(
         midnightRef.current,
@@ -104,7 +104,7 @@ export default function WelcomeSection() {
           duration: 5,
           ease: "power4.out",
         },
-        "start"
+        "start",
       )
       .fromTo(
         textRef.current,
@@ -118,7 +118,7 @@ export default function WelcomeSection() {
           duration: 1,
           ease: "power1.out",
         },
-        "start+=1"
+        "start+=1",
       )
       .fromTo(
         Array.from(subtextRef.current?.children || []),
@@ -130,23 +130,24 @@ export default function WelcomeSection() {
           duration: 0.5,
           ease: "power1.out",
         },
-        "start+=1.5"
+        "start+=1.5",
       );
   });
   return (
-    <div className="h-screen relative flex justify-center items-center">
+    <div className="relative flex h-screen items-center justify-center bg-radial-[at_50%_-50%] from-darkBlue to-darkbgblue to-60%">
       {/* welcome text */}
-      <div className="mt-6 flex flex-col h-1/3 w-1/2 justify-center items-center gap-5">
+      <div className="mt-6 flex h-1/3 flex-col items-center justify-center sm:w-1/2 sm:gap-5">
         <h1
           ref={textRef}
-          className="text-5xl font-base font-mukta text-aliceBlue text-center"
+          className="font-base z-20 text-center font-mukta text-4xl text-text sm:text-5xl"
         >
           Where Code <br />
           Meets Creativity
         </h1>
+        {/* subtext sm++ */}
         <div
           ref={subtextRef}
-          className="text-aliceBlue/80 text-lg font-light font-mukta w-1/2 text-center"
+          className="z-20 text-center font-mukta text-base font-light text-subtext sm:w-1/2"
         >
           <p>A developer’s journey of turning ideas into interactive</p>
           <p>realities. Innovating at the intersection of design, </p>
@@ -157,7 +158,7 @@ export default function WelcomeSection() {
       {/* city */}
       <div
         ref={nightCityRef}
-        className="w-75 h-100 bg-[#0C1C25] absolute rounded-lg shadow-2xl left-20 z-10 overflow-hidden"
+        className="absolute -left-10 z-10 h-60 w-40 overflow-hidden rounded-lg bg-[#0C1C25] shadow-2xl brightness-30 sm:left-20 sm:h-100 sm:w-75 sm:brightness-80"
       >
         <NightCity />
       </div>
@@ -165,7 +166,7 @@ export default function WelcomeSection() {
       {/* midnight */}
       <div
         ref={midnightRef}
-        className="w-100 h-130 bg-cyan-500 absolute rounded-lg shadow-2xl left-1/2 -translate-x-1/2 overflow-hidden brightness-80"
+        className="absolute left-1/2 z-21 h-100 w-full max-w-75 -translate-x-1/2 overflow-hidden rounded-lg bg-cyan-500 shadow-2xl brightness-80 sm:h-130 sm:w-100 sm:max-w-full"
       >
         <Midnight />
       </div>
@@ -173,7 +174,7 @@ export default function WelcomeSection() {
       {/* underwater */}
       <div
         ref={UnderwaterRef}
-        className="w-75 h-100 bg-cyan-500/50 absolute rounded-lg shadow-2xl right-20 z-10 overflow-hidden brightness-90"
+        className="absolute -right-10 z-10 h-50 w-30 overflow-hidden rounded-lg bg-cyan-500/50 shadow-2xl brightness-30 sm:right-20 sm:h-100 sm:w-75 sm:brightness-90"
       >
         <UnderWater />
       </div>
@@ -181,13 +182,13 @@ export default function WelcomeSection() {
       {/* asset 1 */}
       <div
         ref={asset1Ref}
-        className="w-50 h-80 bg-red-500/50 absolute rounded-lg shadow-2xl left-80 brightness-50 overflow-hidden"
+        className="absolute left-80 hidden h-80 w-50 overflow-hidden rounded-lg bg-red-500/50 shadow-2xl brightness-50 sm:block"
       ></div>
 
       {/* asset 2  */}
       <div
         ref={asset2Ref}
-        className="w-50 h-50 bg-cyan-500/50 absolute rounded-lg shadow-2xl right-0 brightness-50 overflow-hidden"
+        className="absolute right-0 hidden h-50 w-50 overflow-hidden rounded-lg bg-cyan-500/50 shadow-2xl brightness-50 sm:block"
       ></div>
     </div>
   );

@@ -21,43 +21,49 @@ interface Layer {
 const layers: Layer[] = [
   {
     src: moon,
-    className: "top-0 left-0 w-[576px] h-[324px]",
+    className: "top-0 left-0 w-full h-full sm:w-[576px] sm:h-[324px]",
     depth: 2,
     backgroundPosition: "-200px center",
   },
   {
     src: cloud1,
-    className: "top-10 left-10 w-[350px] h-[197px]",
+    className:
+      "hidden sm:block sm:top-10 left-10 w-full h-full sm:w-[350px] sm:h-[197px]",
     depth: 10,
     backgroundPosition: "center -50px",
   },
   {
     src: cloud2,
-    className: "top-20 right-10 w-[350px] h-[197px]",
+    className:
+      "hidden sm:block top-20 right-10 w-full h-full sm:w-[350px] sm:h-[197px]",
     depth: 30,
     backgroundPosition: "center 50px",
   },
   {
     src: city1,
-    className: "bottom-0 -left-5 w-[350px] h-[324px]",
+    className:
+      "bottom-0 left-5 sm:-left-5 w-full h-full sm:w-[350px] sm:h-[324px]",
     depth: 5,
     backgroundPosition: "center",
   },
   {
     src: city2,
-    className: "bottom-0 -left-5 w-[350px] h-[324px]",
+    className:
+      "bottom-0 left-5 sm:-left-5 w-full h-full sm:w-[350px] sm:h-[324px]",
     depth: 10,
     backgroundPosition: "center",
   },
   {
     src: city3,
-    className: "bottom-0 -left-5 w-[350px] h-[324px]",
+    className:
+      "bottom-0 left-5 sm:-left-5 w-full h-full sm:w-[350px] sm:h-[324px]",
     depth: 15,
     backgroundPosition: "center",
   },
   {
     src: city4,
-    className: "-bottom-5 -left-5 w-[350px] h-[324px]",
+    className:
+      "-bottom-5 left-5 sm:-left-5 w-full h-full sm:w-[350px] sm:h-[324px]",
     depth: 10,
     backgroundPosition: "center",
   },

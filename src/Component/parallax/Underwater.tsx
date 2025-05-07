@@ -71,23 +71,11 @@ export default function Underwater() {
       });
     };
 
-    const handleMouseLeave = () => {
-      layersRef.current.forEach((layer) => {
-        gsap.to(layer, {
-          x: 0,
-          ease: "power1.out",
-          duration: 0.5,
-        });
-      });
-    };
-
     const container = containerRef.current;
     container?.addEventListener("mousemove", handleMouseMove);
-    container?.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       container?.removeEventListener("mousemove", handleMouseMove);
-      container?.removeEventListener("mouseleave", handleMouseLeave);
     };
   });
   return (
@@ -105,8 +93,8 @@ export default function Underwater() {
           }}
         />
       ))}
-      <div className="absolute top-1/2 left-1/3 sprite squid-idle step-6" />
-      <div className="absolute top-1/2 right-1/3 sprite fish-idle step-4" />
+      <div className="hidden sm:absolute top-1/2 left-1/3 sprite squid-idle step-6" />
+      <div className="hidden sm:absolute top-1/2 right-1/3 sprite fish-idle step-4" />
     </section>
   );
 }

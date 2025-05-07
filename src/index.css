@@ -15,7 +15,7 @@
   --color-darkbgGray: #1e1e1e;
   --color-darkbgNavy: #121a26;
   --color-darkbgblue: #00071e;
-  --color-darkbg: #11416b;
+  --color-darkbg: #0d1117;
   --color-darkBlue: #041340;
   --color-darkPurple: #290773;
   --color-secondaryDarkBg: #041a59;
@@ -24,6 +24,19 @@
   --color-lightbg: #041a59;
   --color-lightPurple: #5505a6;
   --color-lightBlue: #0a58bf;
+
+  /* pallate */
+  --color-background: #00071e;
+  --color-surface: #041340;
+  --color-surface-secondary: #0a1d4c;
+  --color-primary: #3d7eff;
+  --color-accent-1: #5fa9f4;
+  --color-accent-2: #47d8e0;
+  --color-highlight: #7288ff;
+  --color-text: #d1d9f0;
+  --color-subtext: #7c8bac;
+  --color-divider: #0d1a3a;
+  --color-cyan: oklch(0.715 0.143 215.221);
 
   /* text */
   --color-aliceBlue: #f0f8ff;

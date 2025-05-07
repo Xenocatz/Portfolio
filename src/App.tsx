@@ -7,7 +7,7 @@ import gsap from "gsap";
 
 function App() {
   const [isIntro, setIsIntro] = useState(
-    sessionStorage.getItem("intro") !== "false"
+    sessionStorage.getItem("intro") !== "false",
   );
   const scrollerRef = useRef<HTMLDivElement>(null);
   const lenisRef = useRef<Lenis | null>(null);
@@ -17,6 +17,8 @@ function App() {
       sessionStorage.setItem("intro", "true");
     }
 
+    let rafId: number;
+
     const timeout = setTimeout(() => {
       sessionStorage.setItem("intro", "false");
       gsap.to("#intro", {
@@ -24,7 +26,6 @@ function App() {
         duration: 0.5,
         onComplete: () => {
           setIsIntro(false);
-
           if (scrollerRef.current) {
             lenisRef.current = new Lenis({
               smoothWheel: true,
@@ -42,9 +43,6 @@ function App() {
         },
       });
     }, 3000);
-
-    let rafId: number;
-
     return () => {
       clearTimeout(timeout);
       cancelAnimationFrame(rafId);
@@ -52,27 +50,25 @@ function App() {
     };
   }, []);
 
-  console.log("isIntro : ", isIntro);
-
   return (
     <>
-      <main className="bg-radial-[at_50%_-50%] from-darkBlue to-darkbgblue to-90% h-screen pr-[5px] ">
+      <main className="h-screen bg-background pr-[5px]">
         <div
           ref={scrollerRef}
-          className={`relative h-full custom-scrollbar ${
+          className={`custom-scrollbar relative h-full ${
             isIntro ? "overflow-hidden" : "overflow-y-scroll"
           }`}
         >
           {isIntro ? (
             <div
               id="intro"
-              className="absolute top-0 right-0 flex flex-col h-screen w-full gap-10 justify-center items-center"
+              className="absolute top-0 right-0 flex h-screen w-full flex-col items-center justify-center gap-10"
             >
               <LogoMain />
             </div>
           ) : (
             <>
-              <NavBar scrollerRef={scrollerRef} />
+              <NavBar />
               <Outlet />
             </>
           )}

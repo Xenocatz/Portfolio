@@ -20,31 +20,33 @@ const layers: Layer[] = [
   {
     src: background,
     depth: 10,
-    classname: "w-[700px] h-[800px] -top-5 -left-5",
+    classname: "w-[350px] h-full sm:w-[700px] sm:h-[800px] -top-5 -left-5",
     backgroundPosition: "center center",
   },
   {
     src: rock,
     depth: 30,
-    classname: "w-[600px] h-[350px] bottom-0",
+    classname:
+      "w-[350px] h-[200px] sm:w-[600px] sm:h-[350px] bottom-0 -left-5 sm:left-0",
     backgroundPosition: "center",
   },
   {
     src: ground,
     depth: 10,
-    classname: "w-[500px] h-[300px] -bottom-1 -left-5",
+    classname:
+      "w-[350px] h-[200px] sm:w-[500px] sm:h-[300px] -bottom-1 -left-5",
     backgroundPosition: "center",
   },
   {
     src: cloud1,
     depth: 8,
-    classname: "w-[400px] h-[300px] top-0",
+    classname: "w-[350px] h-full sm:w-[400px] sm:h-[300px] top-0 -left-5",
     backgroundPosition: "center",
   },
   {
     src: cloud2,
     depth: 10,
-    classname: "w-[400px] h-[300px] top-0",
+    classname: "w-[350px] h-full sm:w-[400px] sm:h-[300px] top-0",
     backgroundPosition: "center",
   },
 ];
@@ -76,27 +78,16 @@ export default function Midnight() {
       });
     };
 
-    const handleMouseLeave = () => {
-      layerRef.current.forEach((layer) => {
-        gsap.to(layer, {
-          x: 0,
-          ease: "power1.out",
-          duration: 0.5,
-        });
-      });
-    };
     const container = containerRef.current;
     container?.addEventListener("mousemove", handleMouseMove);
-    container?.addEventListener("mouseleave", handleMouseLeave);
 
     return () => {
       container?.removeEventListener("mousemove", handleMouseMove);
-      container?.removeEventListener("mouseleave", handleMouseLeave);
     };
   }, []);
 
   return (
-    <section ref={containerRef} className="relative w-full h-full">
+    <section ref={containerRef} className="relative h-full w-full">
       {layers.map((layer, index) => (
         <div
           ref={(el) => {
@@ -110,7 +101,7 @@ export default function Midnight() {
           }}
         />
       ))}
-      <div className="absolute bottom-10 scale-150 left-45 sprite dog-attack step-4 brightness-70" />
+      <div className="sprite dog-attack step-4 bottom-10 left-45 hidden scale-150 brightness-70 sm:absolute" />
     </section>
   );
 }

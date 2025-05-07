@@ -25,7 +25,7 @@ export default function LogoMain() {
 
         ease: "power1.out",
       },
-      0
+      0,
     )
       .to(iconRef.current, {
         x: 0,
@@ -42,7 +42,7 @@ export default function LogoMain() {
           duration: 2.5,
           ease: "back.out",
         },
-        0
+        0,
       )
       .to(
         containerRef.current,
@@ -51,16 +51,16 @@ export default function LogoMain() {
           duration: 1,
           ease: "power1.out",
         },
-        "+=2.5"
+        "+=2.5",
       );
   }, []);
 
   return (
-    <div ref={containerRef} className="flex gap-4 justify-center items-center">
+    <div ref={containerRef} className="flex items-center justify-center gap-4">
       {/* icon */}
       <img
         ref={iconRef}
-        className="relative w-30 h-30"
+        className="relative h-30 w-30"
         src="/logoCat.png"
         alt="icon"
       />

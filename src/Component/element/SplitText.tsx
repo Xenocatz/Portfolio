@@ -24,7 +24,7 @@ export default function SplitText({
   const splitText = useMemo(() => {
     const text = typeof children === "string" ? children : "";
     return text.split("").map((char, index) => (
-      <span className="inline-block " key={index}>
+      <span className="inline-block" key={index}>
         {char}
       </span>
     ));
@@ -52,14 +52,14 @@ export default function SplitText({
         // scaleX: 1,
         stagger: stagger,
         delay: delay,
-      }
+      },
     );
   }, [animationDuration, stagger, ease]);
 
   return (
     <div ref={containerRef} className={``}>
       <span
-        className={`inline-block text-aliceBlue leading-[1.5] gap-2 ${textClassName}`}
+        className={`inline-block gap-2 leading-[1.5] text-text ${textClassName}`}
       >
         {splitText}
       </span>

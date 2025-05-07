@@ -3,13 +3,19 @@ import SplitText from "../element/SplitText";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
-import { FileUser, PawPrint } from "lucide-react";
+import {
+  AudioLines,
+  HomeIcon,
+  LayoutTemplate,
+  PawPrint,
+  PersonStanding,
+  Send,
+} from "lucide-react";
 import { ScrollTrigger } from "gsap/all";
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
-type ScrollerProps = { scrollerRef: React.RefObject<HTMLDivElement | null> };
 
-export default function NavBar({ scrollerRef }: ScrollerProps) {
+export default function NavBar() {
   const iconRef = useRef<HTMLImageElement>(null);
   const headerRef = useRef<HTMLDivElement>(null);
   const navRef = useRef<HTMLDivElement>(null);
@@ -32,7 +38,7 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
           duration: 1,
           ease: "back.inOut",
         },
-        "navItems"
+        "navItems",
       )
       .fromTo(
         listRef.current?.children || [],
@@ -46,7 +52,7 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
           duration: 1,
           stagger: 0.1,
           ease: "back.inOut",
-        }
+        },
       )
       .fromTo(
         iconRef.current,
@@ -62,7 +68,7 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
 
           ease: "power1.out",
         },
-        "navItems+=0.5"
+        "navItems+=0.5",
       )
       .to(iconRef.current, { x: 0, duration: 1, ease: "back.inOut" }, "<+=0.5")
       .fromTo(
@@ -75,49 +81,32 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
           duration: 2.5,
           ease: "back.out",
         },
-        "navItems+=0.5"
+        "navItems+=0.5",
       )
       .to(
         buttonRef.current,
         { opacity: 1, y: 0, duration: 1, ease: "back.out" },
-        "navItems+=1.9"
+        "navItems+=1.9dcxxxxxxxxxxxxxxxxxxxxx",
       );
   }, []);
-  useGSAP(() => {
-    if (scrollerRef.current) {
-      gsap.to(headerRef.current, {
-        paddingRight: 300,
-        paddingLeft: 300,
-        duration: 1,
-        ease: "power1.inOut",
-        scrollTrigger: {
-          scroller: scrollerRef.current,
-          trigger: headerRef.current,
-          start: "300% 30%",
-          end: "300% top",
-          scrub: 0.5,
-        },
-      });
-    }
-  }, [scrollerRef.current]);
 
   return (
     <>
       <header
         ref={headerRef}
-        className="fixed top-0 left-0 w-full font-mukta  z-9999"
+        className="fixed top-0 left-0 z-9999 w-full bg-linear-to-b from-darkbg via-darkbg/30 to-transparent font-mukta"
       >
-        <div className="py-2 flex justify-between items-center  px-5">
+        <div className="flex items-center justify-between px-5 py-2">
           {/* logo */}
-          <div className="flex gap-2 justify-center items-center">
+          <div className="flex flex-1 items-center justify-start md:gap-2">
             <img
               ref={iconRef}
-              className="relative w-16 h-16"
+              className="relative h-12 w-12 md:h-16 md:w-16"
               src="/logoCat.png"
               alt="icon"
             />
             <SplitText
-              textClassName="text-2xl font-mukta font-base"
+              textClassName="md:text-2xl text-xl font-mukta font-base"
               animationDuration={0.5}
               stagger={0.1}
               delay={2}
@@ -126,9 +115,10 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
               LoneCatz
             </SplitText>
           </div>
+          {/* nav md++ */}
           <nav
             ref={navRef}
-            className="bg-black/10 backdrop-blur-xs p-3 border-x-2 border-cyan-700/80 rounded"
+            className="hidden rounded border-x-2 border-cyan-700/80 bg-black/10 p-3 backdrop-blur-xs md:flex"
           >
             <ul ref={listRef} className="flex gap-10">
               <NavElement text="Home" to="/" />
@@ -137,17 +127,26 @@ export default function NavBar({ scrollerRef }: ScrollerProps) {
               <NavElement text="Contact" to="/contact" />
             </ul>
           </nav>
-          {/* download resume */}
-          <button
-            ref={buttonRef}
-            className="relative group p-[2px] cursor-pointer"
-          >
-            <div className="relative bg-gray-800 p-2 flex gap-2 justify-center items-center rounded-lg border border-cyan-700/50 text-cyan-400/80 highlight-text ">
-              <FileUser className="inline-block" />
-              download resume
-            </div>
-          </button>
+
+          {/* audio */}
+          <div className="flex flex-1 justify-end">
+            <button
+              ref={buttonRef}
+              className="rounded-full p-1 hover:bg-darkbg"
+            >
+              <AudioLines className="size-6 text-text md:size-8" />
+            </button>
+          </div>
         </div>
+        {/* nav mobile */}
+        <nav className="fixed bottom-0 left-0 flex w-full bg-darkbg/90 backdrop-blur-xs md:hidden">
+          <ul className="flex w-full gap-10 px-10">
+            <NavMobile text="Home" icon={<HomeIcon />} to="/" />
+            <NavMobile text="About" icon={<PersonStanding />} to="/about" />
+            <NavMobile text="project" icon={<LayoutTemplate />} to="/project" />
+            <NavMobile text="contact" icon={<Send />} to="/contact" />
+          </ul>
+        </nav>
       </header>
     </>
   );
@@ -157,14 +156,40 @@ const NavElement = ({ text, to }: { text: string; to: string }) => {
   const active = useLocation().pathname === to;
   return (
     <li
-      className={`cursor-pointer flex gap-2 justify-center items-center ${
+      className={`flex cursor-pointer items-center justify-center gap-2 ${
         active
-          ? "text-cyan-400/70 highlight-text font-bold"
-          : "text-aliceBlue/80 font-light"
+          ? "highlight-text font-bold text-cyan-400/70"
+          : "font-light text-text"
       }`}
     >
       {active && <PawPrint className="w-5 text-cyan-500" />}
       <Link to={to}>{text}</Link>
+    </li>
+  );
+};
+
+const NavMobile = ({
+  text,
+  icon,
+  to,
+}: {
+  text: string;
+  icon: React.ReactNode;
+  to: string;
+}) => {
+  const active = useLocation().pathname === to;
+  return (
+    <li className="flex-grow cursor-pointer select-none">
+      <Link to={to}>
+        <div
+          className={`${
+            active ? "text-cyan" : "text-text"
+          } flex flex-col items-center justify-center py-3`}
+        >
+          {icon}
+          {text}
+        </div>
+      </Link>
     </li>
   );
 };
