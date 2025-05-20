@@ -108,7 +108,7 @@ export default function NavBar() {
             <SplitText
               textClassName="md:text-2xl text-xl font-mukta font-base"
               animationDuration={0.5}
-              stagger={0.1}
+              stagger={0.05}
               delay={2}
               ease="back.out"
             >
@@ -118,7 +118,7 @@ export default function NavBar() {
           {/* nav md++ */}
           <nav
             ref={navRef}
-            className="hidden rounded border-x-2 border-cyan-700/80 bg-black/10 p-3 backdrop-blur-xs md:flex"
+            className="hidden rounded-lg bg-surface/20 p-3 backdrop-blur-xs md:flex"
           >
             <ul ref={listRef} className="flex gap-10">
               <NavElement text="Home" to="/" />

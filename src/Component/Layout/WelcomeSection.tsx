@@ -4,8 +4,9 @@ import { useRef } from "react";
 import NightCity from "../parallax/NightCity";
 import Midnight from "../parallax/Midnight";
 import UnderWater from "../parallax/Underwater";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
-gsap.registerPlugin(useGSAP);
+gsap.registerPlugin(useGSAP, ScrollTrigger);
 export default function WelcomeSection() {
   const nightCityRef = useRef<HTMLDivElement>(null);
   const midnightRef = useRef<HTMLDivElement>(null);
@@ -133,8 +134,56 @@ export default function WelcomeSection() {
         "start+=1.5",
       );
   });
+
+  // useGSAP(() => {
+  //   const tl = gsap.timeline({
+  //     scrollTrigger: {
+  //       trigger: "#home",
+  //       start: "top top",
+  //       end: "bottom top",
+  //       scrub: true,
+  //     },
+  //   });
+  //   tl.to(
+  //     nightCityRef.current,
+  //     {
+  //       willChange: "transform",
+  //       yPercent: 20,
+  //       scaleY: 1,
+  //       duration: 5,
+  //       ease: "power4.out",
+  //     },
+  //     "start",
+  //   )
+  //     .to(
+  //       asset1Ref.current,
+  //       {
+  //         willChange: "transform",
+  //         yPercent: -80,
+  //         scaleY: 1,
+  //         duration: 5,
+  //         ease: "power4.out",
+  //       },
+  //       "start",
+  //     )
+  //     .to(
+  //       UnderwaterRef.current,
+  //       {
+  //         willChange: "transform",
+  //         yPercent: -20,
+  //         scaleY: 1,
+  //         duration: 5,
+  //         ease: "power4.out",
+  //       },
+  //       "start",
+  //     );
+  // });
+
   return (
-    <div className="relative flex h-screen items-center justify-center bg-radial-[at_50%_-50%] from-darkBlue to-darkbgblue to-60%">
+    <div
+      id="home"
+      className="relative flex h-screen items-center justify-center bg-radial-[at_50%_-50%] from-darkBlue to-darkbgblue to-60%"
+    >
       {/* welcome text */}
       <div className="mt-6 flex h-1/3 flex-col items-center justify-center sm:w-1/2 sm:gap-5">
         <h1

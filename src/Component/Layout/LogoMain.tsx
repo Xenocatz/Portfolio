@@ -69,7 +69,7 @@ export default function LogoMain() {
       <SplitText
         textClassName="text-6xl font-mukta font-base"
         animationDuration={0.5}
-        stagger={0.1}
+        stagger={0.05}
         delay={1}
         ease="back.out"
       >

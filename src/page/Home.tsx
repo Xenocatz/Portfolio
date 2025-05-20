@@ -7,6 +7,7 @@ import WelcomeSection from "../Component/Layout/WelcomeSection";
 import ProjectList from "../Component/element/ProjectList";
 import ProjectDetail from "../Component/element/ProjectDetail";
 import { Link } from "react-router";
+import BgNightOcean from "../Component/element/BgNightOcean";
 
 const projects = [
   {
@@ -52,23 +53,28 @@ export default function Home() {
       <WelcomeSection />
       <main className="flex w-full flex-col items-center justify-center py-5">
         {/* section 1 - herosection */}
-        <section className="max-h-screen w-6/7 rounded bg-surface px-5 py-5 sm:mt-30 sm:px-10">
-          <p className="mb-5 flex gap-2 font-mukta text-lg text-text sm:mb-10 sm:text-2xl">
-            <Grab className="text-cyan" /> yo, Faiz here.
-          </p>
-          <h1 className="font-parkinsans text-4xl font-semibold text-text sm:max-w-2/3 sm:text-6xl">
-            crafted with <span className="text-cyan">logic</span> and a sense of{" "}
-            <span className="text-cyan">purpose</span>. ready to turn your ideas
-            into <span className="text-cyan">reality</span>.
-          </h1>
+        <section className="relative max-h-screen w-6/7 overflow-hidden rounded bg-surface/50 px-5 py-5 sm:mt-30 sm:px-10">
+          <BgNightOcean />
 
-          <p className="mt-5 max-w-3/4 justify-self-end text-end font-mukta text-sm text-subtext sm:mt-30 sm:max-w-2/3 sm:text-base">
-            From the simplest HTML tag to complex React logic. <br /> I create
-            web experiences that feel intuitive and purposeful.
-          </p>
-          <button className="mt-10 flex cursor-pointer justify-self-end rounded-full bg-aliceBlue/90 px-4 py-2 font-mukta text-sm font-semibold text-black duration-200 hover:bg-cyan-500 sm:px-5 sm:py-3 sm:text-base">
-            know me better
-          </button>
+          {/* content */}
+          <div className="relative z-10">
+            <p className="mb-5 flex gap-2 font-mukta text-lg text-text sm:mb-10 sm:text-2xl">
+              <Grab className="text-cyan" /> yo, Faiz here.
+            </p>
+            <h1 className="font-parkinsans text-4xl font-semibold text-text sm:max-w-2/3 sm:text-6xl">
+              crafted with <span className="text-cyan">logic</span> and a sense
+              of <span className="text-cyan">purpose</span>. ready to turn your
+              ideas into <span className="text-cyan">reality</span>.
+            </h1>
+
+            <p className="mt-5 max-w-3/4 justify-self-end text-end font-mukta text-sm text-subtext sm:mt-30 sm:max-w-2/3 sm:text-base">
+              From the simplest HTML tag to complex React logic. <br /> I create
+              web experiences that feel intuitive and purposeful.
+            </p>
+            <button className="mt-10 flex cursor-pointer justify-self-end rounded-full bg-aliceBlue/90 px-4 py-2 font-mukta text-sm font-semibold text-black duration-200 hover:bg-cyan-500 sm:px-5 sm:py-3 sm:text-base">
+              know me better
+            </button>
+          </div>
         </section>
 
         {/* section 2 - about*/}
@@ -97,12 +103,18 @@ export default function Home() {
               </p>
             </div>
             {/* gambar kanan */}
-            <div className="flex-1 rounded-l-lg bg-blue-500"> </div>
+            <div className="flex-1 rounded-l-lg bg-blue-500">
+              <img
+                src="/3385452116_70876832253163_1745150276749.png"
+                alt=""
+                className="h-full w-full object-cover"
+              />
+            </div>
           </div>
         </section>
 
         {/* section 3 - project*/}
-        <section className="w-full px-5 pt-30 pb-20 font-mukta text-text sm:mt-50 sm:px-50">
+        <section className="w-full px-5 pt-30 pb-20 font-mukta text-text sm:my-20 sm:px-50">
           <div>
             <h3 className="highlight-text flex w-fit items-center gap-3 font-mukta text-lg font-semibold text-cyan-500/80 sm:text-2xl">
               <PawPrint className="sm:w-7text-cyan w-5" /> projects
@@ -120,11 +132,7 @@ export default function Home() {
                 return (
                   <ProjectList
                     key={index}
-                    index={index}
                     projectName={project.name}
-                    projectLogo={project.logo}
-                    year={project.year}
-                    category={project.category}
                     bgClass={project.bgClass}
                     active={index === 0}
                   />
@@ -201,16 +209,25 @@ export default function Home() {
           {/* media */}
           <div className="sm:flex sm:flex-row-reverse sm:justify-between">
             <ul className="mt-5 flex justify-center gap-5 text-text">
-              <Link to="https://github.com/Xenocatz" target="_blank">
+              <Link
+                to="https://github.com/Xenocatz"
+                target="_blank"
+                title="Github"
+              >
                 <Github />
               </Link>
               <Link
                 to="https://www.linkedin.com/in/muhammad-faiz-670800313"
                 target="_blank"
+                title="Linkedin"
               >
                 <Linkedin />
               </Link>
-              <Link to="https://www.instagram.com/fzz.xnnt" target="_blank">
+              <Link
+                to="https://www.instagram.com/fzz.xnnt"
+                target="_blank"
+                title="Instagram"
+              >
                 <Instagram />
               </Link>
             </ul>

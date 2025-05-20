@@ -1,19 +1,11 @@
 export default function ProjectList({
   projectName,
-  projectLogo,
   bgClass,
-  year,
-  category,
-  index,
   active,
 }: {
   projectName: string;
-  projectLogo?: string;
   bgClass?: string;
   active?: boolean;
-  year: string;
-  category: string;
-  index: number;
 }) {
   return (
     <li className="flex flex-grow overflow-hidden">
