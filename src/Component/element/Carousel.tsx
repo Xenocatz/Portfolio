@@ -10,7 +10,7 @@ export default function Carousel({ images }: { images: string[] }) {
   const [activeIndex, setActiveIndex] = useState(0);
 
   const itemsCounts = images.length;
-  // mulai interval
+
   const startAutoPlay = () => {
     intervalRef.current = setInterval(() => {
       const nextIndex = (currentIndex.current + 1) % itemsCounts;
@@ -24,16 +24,21 @@ export default function Carousel({ images }: { images: string[] }) {
     }, 4000);
   };
 
-  // nentuin offsets
+  // nentuin offsets setelah semua gambar dimuat
   useEffect(() => {
-    const position = imageRefs.current.map((image) => {
-      return image?.offsetLeft || 0;
-    });
-    setOffsets(position);
-    console.log(itemsCounts);
+    const handleLoad = () => {
+      const position = imageRefs.current.map((image) => image?.offsetLeft || 0);
+      setOffsets(position);
+    };
+
+    if (document.readyState === "complete") {
+      handleLoad();
+    } else {
+      window.addEventListener("load", handleLoad);
+      return () => window.removeEventListener("load", handleLoad);
+    }
   }, []);
 
-  // animation
   useEffect(() => {
     if (offsets.length === 0) return;
     startAutoPlay();
@@ -42,7 +47,6 @@ export default function Carousel({ images }: { images: string[] }) {
     };
   }, [offsets]);
 
-  // handle pointer click
   const goToIndex = (index: number) => {
     if (!containerRef.current || index === currentIndex.current) return;
 
@@ -82,7 +86,7 @@ export default function Carousel({ images }: { images: string[] }) {
             onClick={() => goToIndex(i)}
             className={`${
               i === activeIndex ? "bg-cyan" : "bg-cyan/30"
-            } h-2 w-2 rounded-full`}
+            } h-2 w-2 cursor-pointer rounded-full`}
           ></span>
         ))}
       </div>
