@@ -147,11 +147,11 @@ export default function NavBar() {
             <NavMobile text="contact" icon={<Send />} to="/contact" />
           </ul>
         </nav>
-        <div className="fixed top-20 left-5 z-9999 flex items-center justify-center rounded-xl bg-text p-5 shadow">
+        {/* <div className="fixed top-20 left-5 z-9999 flex items-center justify-center rounded-xl bg-text p-5 shadow">
           <h1 className="text-center text-2xl text-background">
             still under construction :)
           </h1>
-        </div>
+        </div> */}
       </header>
     </>
   );

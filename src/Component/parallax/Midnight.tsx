@@ -71,11 +71,6 @@ export default function Midnight() {
           });
         }
       });
-      gsap.to([".dog-idle"], {
-        x: x * 10,
-        ease: "power1.out",
-        duration: 0.3,
-      });
     };
 
     const container = containerRef.current;

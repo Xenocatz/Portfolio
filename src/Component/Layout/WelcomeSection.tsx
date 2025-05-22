@@ -1,13 +1,27 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import NightCity from "../parallax/NightCity";
 import Midnight from "../parallax/Midnight";
 import UnderWater from "../parallax/Underwater";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useScrollStore } from "../../store/scrollStore";
+import { useOutletContext } from "react-router";
+
+interface OutletContextType {
+  scrollerRef: React.RefObject<HTMLElement>;
+}
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 export default function WelcomeSection() {
+  // outlet
+  const { scrollerRef } = useOutletContext<OutletContextType>();
+  // store
+  const openScrollBar = useScrollStore((state) => state.openScrollBar);
+  const closeScrollBar = useScrollStore((state) => state.closeScrollBar);
+
+  // hooks
+  const [isIntro, setIsIntro] = useState(false);
   const nightCityRef = useRef<HTMLDivElement>(null);
   const midnightRef = useRef<HTMLDivElement>(null);
   const UnderwaterRef = useRef<HTMLDivElement>(null);
@@ -17,167 +31,182 @@ export default function WelcomeSection() {
   const subtextRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
-    const tl = gsap.timeline({
-      onComplete: () => {
-        console.log("has animated");
-      },
-    });
-    tl.set(
-      [
-        nightCityRef.current,
-        UnderwaterRef.current,
-        midnightRef.current,
-        asset1Ref.current,
-        asset2Ref.current,
-      ],
-      {
-        opacity: 0,
-        yPercent: 270,
-        scaleY: 1.2,
-      },
-    )
-      .addLabel("start")
-      .to(
-        [
+    if (
+      nightCityRef.current &&
+      UnderwaterRef.current &&
+      midnightRef.current &&
+      asset1Ref.current &&
+      asset2Ref.current &&
+      textRef.current &&
+      subtextRef.current
+    ) {
+      const tl = gsap.timeline({});
+      tl.add(() => closeScrollBar())
+        .set(
+          [
+            nightCityRef.current,
+            UnderwaterRef.current,
+            midnightRef.current,
+            asset1Ref.current,
+            asset2Ref.current,
+          ],
+          {
+            opacity: 0,
+            yPercent: 270,
+            scaleY: 1.2,
+          },
+        )
+        .addLabel("start")
+        .to(
+          [
+            nightCityRef.current,
+            asset1Ref.current,
+            UnderwaterRef.current,
+            asset2Ref.current,
+            midnightRef.current,
+          ],
+          {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power4.out",
+          },
+          "start+=0.5",
+        )
+        .to(
           nightCityRef.current,
+          {
+            willChange: "transform",
+            yPercent: 50,
+            scaleY: 1,
+            duration: 4,
+            ease: "power4.out",
+          },
+          "start+=0.5",
+        )
+        .to(
           asset1Ref.current,
+          {
+            willChange: "transform",
+            yPercent: -60,
+            scaleY: 1,
+            duration: 4,
+            ease: "power4.out",
+          },
+          "start+=0.5",
+        )
+        .to(
           UnderwaterRef.current,
+          {
+            willChange: "transform",
+            yPercent: 0,
+            scaleY: 1,
+            duration: 4,
+            ease: "power4.out",
+          },
+          "start+=0.5",
+        )
+        .to(
           asset2Ref.current,
+          {
+            willChange: "transform",
+            yPercent: -200,
+            scaleY: 1,
+            duration: 5,
+            ease: "power4.out",
+          },
+          "start+=0.5",
+        )
+        .to(
           midnightRef.current,
-        ],
-        {
-          opacity: 1,
-          duration: 0.5,
-          ease: "power4.out",
-        },
-        "start+=0.5",
-      )
-      .to(
-        nightCityRef.current,
-        {
-          willChange: "transform",
-          yPercent: 50,
-          scaleY: 1,
-          duration: 4,
-          ease: "power4.out",
-        },
-        "start+=0.5",
-      )
-      .to(
-        asset1Ref.current,
-        {
-          willChange: "transform",
-          yPercent: -60,
-          scaleY: 1,
-          duration: 4,
-          ease: "power4.out",
-        },
-        "start+=0.5",
-      )
-      .to(
-        UnderwaterRef.current,
-        {
-          willChange: "transform",
-          yPercent: 0,
-          scaleY: 1,
-          duration: 4,
-          ease: "power4.out",
-        },
-        "start+=0.5",
-      )
-      .to(
-        asset2Ref.current,
-        {
-          willChange: "transform",
-          yPercent: -200,
-          scaleY: 1,
-          duration: 5,
-          ease: "power4.out",
-        },
-        "start+=0.5",
-      )
-      .to(
-        midnightRef.current,
-        {
-          willChange: "transform",
-          yPercent: -80,
-          scaleY: 1,
-          duration: 5,
-          ease: "power4.out",
-        },
-        "start",
-      )
-      .fromTo(
-        textRef.current,
-        {
-          opacity: 0,
-          scale: 0.5,
-        },
-        {
-          opacity: 1,
-          scale: 1,
-          duration: 1,
-          ease: "power1.out",
-        },
-        "start+=1",
-      )
-      .fromTo(
-        Array.from(subtextRef.current?.children || []),
-        { opacity: 0, y: -10 },
-        {
-          opacity: 1,
-          y: 0,
-          stagger: 0.3,
-          duration: 0.5,
-          ease: "power1.out",
-        },
-        "start+=1.5",
-      );
+          {
+            willChange: "transform",
+            yPercent: -80,
+            scaleY: 1,
+            duration: 5,
+            ease: "power4.out",
+          },
+          "start",
+        )
+        .fromTo(
+          textRef.current,
+          {
+            opacity: 0,
+            scale: 0.5,
+          },
+          {
+            opacity: 1,
+            scale: 1,
+            duration: 1,
+            ease: "power1.out",
+          },
+          "start+=1",
+        )
+        .fromTo(
+          Array.from(subtextRef.current.children),
+          { opacity: 0, y: -10 },
+          {
+            opacity: 1,
+            y: 0,
+            stagger: 0.3,
+            duration: 0.5,
+            ease: "power1.out",
+          },
+          "start+=1.5",
+        )
+        .add(() => {
+          openScrollBar();
+          setIsIntro(true);
+        }, "start+=3");
+    }
   });
 
   // useGSAP(() => {
-  //   const tl = gsap.timeline({
-  //     scrollTrigger: {
-  //       trigger: "#home",
-  //       start: "top top",
-  //       end: "bottom top",
-  //       scrub: true,
-  //     },
-  //   });
-  //   tl.to(
-  //     nightCityRef.current,
-  //     {
-  //       willChange: "transform",
-  //       yPercent: 20,
-  //       scaleY: 1,
-  //       duration: 5,
-  //       ease: "power4.out",
-  //     },
-  //     "start",
-  //   )
-  //     .to(
-  //       asset1Ref.current,
+  //   if (isIntro) {
+  //     const tl = gsap.timeline({
+  //       scrollTrigger: {
+  //         trigger: "#home",
+  //         start: "top top",
+  //         end: "bottom top",
+  //         scroller: scrollerRef.current,
+  //         scrub: true,
+  //       },
+  //     });
+  //     tl.to(
+  //       nightCityRef.current,
   //       {
   //         willChange: "transform",
-  //         yPercent: -80,
+  //         yPercent: 20,
   //         scaleY: 1,
   //         duration: 5,
   //         ease: "power4.out",
   //       },
   //       "start",
   //     )
-  //     .to(
-  //       UnderwaterRef.current,
-  //       {
-  //         willChange: "transform",
-  //         yPercent: -20,
-  //         scaleY: 1,
-  //         duration: 5,
-  //         ease: "power4.out",
-  //       },
-  //       "start",
-  //     );
-  // });
+  //       .to(
+  //         asset1Ref.current,
+  //         {
+  //           willChange: "transform",
+  //           yPercent: -80,
+  //           scaleY: 1,
+  //           duration: 5,
+  //           ease: "power4.out",
+  //         },
+  //         "start",
+  //       )
+  //       .to(
+  //         UnderwaterRef.current,
+  //         {
+  //           willChange: "transform",
+  //           yPercent: -20,
+  //           scaleY: 1,
+  //           duration: 5,
+  //           ease: "power4.out",
+  //         },
+  //         "start",
+  //       );
+  //     ScrollTrigger.refresh();
+  //   }
+  // }, [isIntro]);
 
   return (
     <div

@@ -78,21 +78,21 @@ export default function Home() {
         </section>
 
         {/* section 2 - about*/}
-        <section className="mt-10 flex w-6/7 flex-col items-start justify-center py-5 font-mukta text-text sm:mt-30 sm:px-10">
+        <section className="mt-10 flex w-6/7 flex-col items-start justify-center py-5 font-mukta text-text sm:mt-30">
           <div>
             <h3 className="highlight-text mb-5 flex items-center gap-3 font-mukta text-lg font-semibold text-cyan-500/80 sm:text-2xl">
               <PawPrint className="w-5 text-cyan sm:w-7" /> about me
             </h3>
           </div>
-          <div className="flex w-full flex-col overflow-hidden rounded-lg shadow-2xl outline-1 outline-text/30 sm:flex-row">
+          <div className="flex w-full flex-col overflow-hidden rounded-r-lg border-l-1 border-text/80 shadow-2xl sm:flex-row">
             {/* text kiri */}
             <div className="flex flex-1 flex-col items-center justify-center rounded-r-lg px-5 py-5">
-              <p className="text-center font-thin sm:max-w-full sm:text-start sm:text-2xl sm:tracking-wide">
+              <p className="font-thin sm:max-w-full sm:text-2xl sm:tracking-wide">
                 Currently, I’m a 4th-semester Informatics Engineering student at
                 Universitas Pamulang, continuously learning and building my way
                 through the world of tech — one line of code at a time.
               </p>
-              <p className="mt-5 text-center font-thin sm:mt-10 sm:max-w-full sm:text-start sm:text-2xl sm:tracking-wide">
+              <p className="mt-5 font-thin sm:mt-10 sm:max-w-full sm:text-2xl sm:tracking-wide">
                 I turn ideas into interactive web experiences that feel natural
                 and just make sense. With a strong foundation in front-end
                 development and a love for crafting seamless user interfaces,
