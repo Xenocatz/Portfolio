@@ -1,27 +1,19 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
-import { useRef, useState } from "react";
+import { useRef } from "react";
 import NightCity from "../parallax/NightCity";
 import Midnight from "../parallax/Midnight";
 import UnderWater from "../parallax/Underwater";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useScrollStore } from "../../store/scrollStore";
-import { useOutletContext } from "react-router";
-
-interface OutletContextType {
-  scrollerRef: React.RefObject<HTMLElement>;
-}
 
 gsap.registerPlugin(useGSAP, ScrollTrigger);
 export default function WelcomeSection() {
-  // outlet
-  const { scrollerRef } = useOutletContext<OutletContextType>();
   // store
   const openScrollBar = useScrollStore((state) => state.openScrollBar);
   const closeScrollBar = useScrollStore((state) => state.closeScrollBar);
 
   // hooks
-  const [isIntro, setIsIntro] = useState(false);
   const nightCityRef = useRef<HTMLDivElement>(null);
   const midnightRef = useRef<HTMLDivElement>(null);
   const UnderwaterRef = useRef<HTMLDivElement>(null);
@@ -41,7 +33,10 @@ export default function WelcomeSection() {
       subtextRef.current
     ) {
       const tl = gsap.timeline({});
-      tl.add(() => closeScrollBar())
+      tl.add(() => {
+        console.log("scrollbar closed");
+        closeScrollBar();
+      })
         .set(
           [
             nightCityRef.current,
@@ -155,63 +150,15 @@ export default function WelcomeSection() {
         )
         .add(() => {
           openScrollBar();
-          setIsIntro(true);
+          console.log("scrollbar open");
         }, "start+=3");
     }
-  });
-
-  // useGSAP(() => {
-  //   if (isIntro) {
-  //     const tl = gsap.timeline({
-  //       scrollTrigger: {
-  //         trigger: "#home",
-  //         start: "top top",
-  //         end: "bottom top",
-  //         scroller: scrollerRef.current,
-  //         scrub: true,
-  //       },
-  //     });
-  //     tl.to(
-  //       nightCityRef.current,
-  //       {
-  //         willChange: "transform",
-  //         yPercent: 20,
-  //         scaleY: 1,
-  //         duration: 5,
-  //         ease: "power4.out",
-  //       },
-  //       "start",
-  //     )
-  //       .to(
-  //         asset1Ref.current,
-  //         {
-  //           willChange: "transform",
-  //           yPercent: -80,
-  //           scaleY: 1,
-  //           duration: 5,
-  //           ease: "power4.out",
-  //         },
-  //         "start",
-  //       )
-  //       .to(
-  //         UnderwaterRef.current,
-  //         {
-  //           willChange: "transform",
-  //           yPercent: -20,
-  //           scaleY: 1,
-  //           duration: 5,
-  //           ease: "power4.out",
-  //         },
-  //         "start",
-  //       );
-  //     ScrollTrigger.refresh();
-  //   }
-  // }, [isIntro]);
+  }, []);
 
   return (
     <div
       id="home"
-      className="relative flex h-screen items-center justify-center bg-radial-[at_50%_-50%] from-darkBlue to-darkbgblue to-60%"
+      className="relative flex h-screen items-center justify-center bg-radial-[at_50%_-50%] from-zinc-800 to-background to-60% text-lime-50/50"
     >
       {/* welcome text */}
       <div className="mt-6 flex h-1/3 flex-col items-center justify-center sm:w-1/2 sm:gap-5">

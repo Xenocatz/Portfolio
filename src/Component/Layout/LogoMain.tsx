@@ -2,11 +2,12 @@ import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
 import SplitText from "../element/SplitText";
+import { Cat } from "lucide-react";
 
 gsap.registerPlugin(useGSAP);
 
 export default function LogoMain() {
-  const iconRef = useRef<HTMLImageElement>(null);
+  const iconRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
   useGSAP(() => {
@@ -58,11 +59,9 @@ export default function LogoMain() {
   return (
     <div ref={containerRef} className="flex items-center justify-center gap-4">
       {/* icon */}
-      <img
+      <Cat
         ref={iconRef}
-        className="relative h-30 w-30"
-        src="/logoCat.png"
-        alt="icon"
+        className="relative h-10 w-10 text-shineText md:h-14 md:w-14"
       />
 
       {/* text */}

@@ -6,7 +6,7 @@ export default function BgNightOcean() {
   return (
     <>
       <div className="absolute top-0 left-0 h-full w-full">
-        <div className="relative h-full w-full brightness-50">
+        <div className="relative h-full w-full brightness-90">
           <div
             className="absolute top-0 left-0 h-full w-full bg-cover bg-no-repeat"
             style={{

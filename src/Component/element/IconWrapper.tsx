@@ -32,7 +32,7 @@ export default function IconWrapper({
   };
   const handleMouseLeave = () => {
     gsap.to(tittleRef.current, {
-      opacity: 1,
+      opacity: 0,
       y: 0,
       x: 0,
       scale: 0.2,
@@ -58,7 +58,7 @@ export default function IconWrapper({
 
         <div
           ref={wrapperRef}
-          className="relative z-10 rounded-2xl border border-text/30 bg-darkbg p-2"
+          className="bg-darkbg relative z-10 rounded-2xl border border-text/30 p-2"
           onMouseEnter={handleMouseEnter}
           onMouseLeave={handleMouseLeave}
         >

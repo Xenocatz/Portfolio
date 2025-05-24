@@ -3,7 +3,6 @@ import { create } from "zustand";
 
 type ScrollStore = {
   lenis: Lenis | null;
-  isScrollBar: string;
   setLenis: (lenis: Lenis) => void;
   openScrollBar: () => void;
   closeScrollBar: () => void;
@@ -11,17 +10,19 @@ type ScrollStore = {
 
 export const useScrollStore = create<ScrollStore>((set, get) => ({
   lenis: null,
-  isScrollBar: "overflow-hidden",
 
   setLenis: (lenis: Lenis) => set({ lenis }),
+
   openScrollBar: () => {
-    set({ isScrollBar: "overflow-y-scroll" });
     const lenis = get().lenis;
+
     if (lenis) lenis.start();
+    console.log("lenis: ", lenis);
   },
+
   closeScrollBar: () => {
-    set({ isScrollBar: "overflow-hidden" });
     const lenis = get().lenis;
     if (lenis) lenis.stop();
+    console.log("lenis: ", lenis);
   },
 }));

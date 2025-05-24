@@ -42,7 +42,7 @@ const projects = [
     ],
     // mobile
     logo: "/projects/whangsaff/chatPage.png",
-    bgClass: "bg-cyan",
+    bgClass: "bg-shineText",
     shadowClass: "shadow-cyan/50",
   },
 ];
@@ -53,35 +53,34 @@ export default function Home() {
       <WelcomeSection />
       <main className="flex w-full flex-col items-center justify-center py-5">
         {/* section 1 - herosection */}
-        <section className="relative max-h-screen w-6/7 overflow-hidden rounded bg-surface/50 px-5 py-5 sm:mt-30 sm:px-10">
-          <BgNightOcean />
-
+        <section className="relative z-22 max-h-screen w-full overflow-hidden rounded px-5 py-5 sm:mt-35 sm:px-50">
           {/* content */}
-          <div className="relative z-10">
+          <div className="relative z-10 px-2">
             <p className="mb-5 flex gap-2 font-mukta text-lg text-text sm:mb-10 sm:text-2xl">
-              <Grab className="text-cyan" /> yo, Faiz here.
+              <Grab className="text-shineText" /> yo, Faiz here.
             </p>
             <h1 className="font-parkinsans text-4xl font-semibold text-text sm:max-w-2/3 sm:text-6xl">
-              crafted with <span className="text-cyan">logic</span> and a sense
-              of <span className="text-cyan">purpose</span>. ready to turn your
-              ideas into <span className="text-cyan">reality</span>.
+              crafted with <span className="text-shineText">logic</span> and a
+              sense of <span className="text-shineText">purpose</span>. ready to
+              turn your ideas into{" "}
+              <span className="text-shineText">reality</span>.
             </h1>
 
             <p className="mt-5 max-w-3/4 justify-self-end text-end font-mukta text-sm text-subtext sm:mt-30 sm:max-w-2/3 sm:text-base">
               From the simplest HTML tag to complex React logic. <br /> I create
               web experiences that feel intuitive and purposeful.
             </p>
-            <button className="mt-10 flex cursor-pointer justify-self-end rounded-full bg-aliceBlue/90 px-4 py-2 font-mukta text-sm font-semibold text-black duration-200 hover:bg-cyan-500 sm:px-5 sm:py-3 sm:text-base">
+            <button className="mt-10 flex cursor-pointer justify-self-end rounded-full bg-aliceBlue/80 px-4 py-2 font-mukta text-sm font-semibold text-black duration-200 hover:bg-aliceBlue sm:px-5 sm:py-3 sm:text-base">
               know me better
             </button>
           </div>
         </section>
 
         {/* section 2 - about*/}
-        <section className="mt-10 flex w-6/7 flex-col items-start justify-center py-5 font-mukta text-text sm:mt-30">
+        <section className="mt-10 flex w-full flex-col items-start justify-center py-5 font-mukta text-text sm:mt-35 sm:px-50">
           <div>
-            <h3 className="highlight-text mb-5 flex items-center gap-3 font-mukta text-lg font-semibold text-cyan-500/80 sm:text-2xl">
-              <PawPrint className="w-5 text-cyan sm:w-7" /> about me
+            <h3 className="highlight-text mb-5 flex items-center gap-3 font-mukta text-lg font-semibold text-shineText/80 sm:text-2xl">
+              <PawPrint className="w-5 text-shineText sm:w-7" /> about me
             </h3>
           </div>
           <div className="flex w-full flex-col overflow-hidden rounded-r-lg border-l-1 border-text/80 shadow-2xl sm:flex-row">
@@ -103,12 +102,8 @@ export default function Home() {
               </p>
             </div>
             {/* gambar kanan */}
-            <div className="flex-1 rounded-l-lg bg-blue-500">
-              <img
-                src="/3385452116_70876832253163_1745150276749.png"
-                alt=""
-                className="h-full w-full object-cover"
-              />
+            <div className="relative flex-1 rounded-l-lg bg-blue-500">
+              <BgNightOcean />
             </div>
           </div>
         </section>
@@ -116,7 +111,7 @@ export default function Home() {
         {/* section 3 - project*/}
         <section className="w-full px-5 pt-30 pb-20 font-mukta text-text sm:my-20 sm:px-50">
           <div>
-            <h3 className="highlight-text flex w-fit items-center gap-3 font-mukta text-lg font-semibold text-cyan-500/80 sm:text-2xl">
+            <h3 className="highlight-text flex w-fit items-center gap-3 font-mukta text-lg font-semibold text-shineText/80 sm:text-2xl">
               <PawPrint className="sm:w-7text-cyan w-5" /> projects
             </h3>
             <p className="mt-3 text-start font-parkinsans text-3xl font-semibold tracking-wide sm:text-4xl">
@@ -124,7 +119,7 @@ export default function Home() {
             </p>
           </div>
           {/* project sm++ */}
-          <div className="mt-10 hidden w-full flex-row-reverse overflow-hidden rounded-lg border border-text/30 sm:flex">
+          <div className="mt-10 hidden w-full flex-row-reverse overflow-hidden rounded-lg sm:flex">
             {/* projectlist */}
             <ul className="flex flex-col justify-between text-text">
               {/* project */}
@@ -189,8 +184,8 @@ export default function Home() {
 
         {/* section 4 - contact*/}
         <section className="my-15 px-5 sm:w-full sm:px-50">
-          <div className="flex w-fit items-center justify-center gap-2 rounded-tl-xl rounded-tr-full bg-cyan/20 py-1 pr-5 pl-2">
-            <p className="highlight-text font-mukta text-sm text-cyan/80 sm:text-base">
+          <div className="flex w-fit items-center justify-center gap-2 rounded-tl-xl rounded-tr-full bg-lime-400/30 py-1 pr-5 pl-2">
+            <p className="highlight-text font-mukta text-sm text-shineText/80 sm:text-base">
               Available for work
             </p>
           </div>
@@ -201,7 +196,7 @@ export default function Home() {
             </h3>
             <Link
               to="/contact"
-              className="mt-5 rounded-full bg-text px-5 py-3 font-semibold text-darkbg duration-200 hover:bg-cyan"
+              className="text-darkbg mt-5 rounded-full bg-text/90 px-5 py-3 font-semibold duration-200 hover:bg-text"
             >
               let's talk
             </Link>

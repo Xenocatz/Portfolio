@@ -85,7 +85,7 @@ export default function Carousel({ images }: { images: string[] }) {
             key={i}
             onClick={() => goToIndex(i)}
             className={`${
-              i === activeIndex ? "bg-cyan" : "bg-cyan/30"
+              i === activeIndex ? "bg-shineText" : "bg-text/30"
             } h-2 w-2 cursor-pointer rounded-full`}
           ></span>
         ))}

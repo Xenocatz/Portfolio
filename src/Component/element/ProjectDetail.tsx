@@ -19,7 +19,7 @@ export default function ProjectDetail({
   return (
     <div className="flex h-full w-full gap-5 p-5">
       {/* foto project */}
-      <div className="w-4/6 overflow-hidden rounded-lg shadow-md shadow-cyan/30">
+      <div className="w-4/6 overflow-hidden rounded-lg shadow-md">
         <Carousel images={images} />
       </div>
       {/* desc project */}
