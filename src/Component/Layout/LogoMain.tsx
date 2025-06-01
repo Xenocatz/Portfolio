@@ -1,8 +1,8 @@
 import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { useRef } from "react";
-import SplitText from "../element/SplitText";
 import { Cat } from "lucide-react";
+import { SplitText } from "gsap/all";
 
 gsap.registerPlugin(useGSAP);
 
@@ -10,51 +10,55 @@ export default function LogoMain() {
   const iconRef = useRef<SVGSVGElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  useGSAP(() => {
-    const tl = gsap.timeline();
-    tl.fromTo(
-      iconRef.current,
-      {
-        opacity: 0,
-        scale: 0.5,
-        x: 200,
-      },
-      {
-        opacity: 1,
-        duration: 0.5,
-        scale: 1,
-
-        ease: "power1.out",
-      },
-      0,
-    )
-      .to(iconRef.current, {
-        x: 0,
-        duration: 1,
-        ease: "back.inOut",
-      })
-      .fromTo(
+  useGSAP(
+    () => {
+      const tl = gsap.timeline();
+      tl.fromTo(
         iconRef.current,
         {
-          rotate: -120,
+          autoAlpha: 0,
+          y: 10,
+          scale: 0.5,
         },
         {
-          rotate: 0,
-          duration: 2.5,
-          ease: "back.out",
+          autoAlpha: 1,
+          y: -5,
+          scale: 1.2,
+          duration: 1.5,
+          ease: "back.inOut",
         },
-        0,
-      )
-      .to(
-        containerRef.current,
+        "navItems+=0.5",
+      ).to(
+        iconRef.current,
         {
-          opacity: 0,
-          duration: 1,
-          ease: "power1.out",
+          y: 0,
+          scale: 1,
+          duration: 1.5,
+          ease: "back.inOut",
         },
-        "+=2.5",
+        "navItems+=1",
       );
-  }, []);
+
+      SplitText.create("#logo", {
+        type: "chars",
+        autoSplit: true,
+        onSplit: (self) => {
+          gsap.from(self.chars, {
+            delay: 2,
+            opacity: 0,
+            y: 10,
+            duration: 0.5,
+            ease: "back.out",
+            stagger: 0.05,
+            onComplete: () => {
+              self.revert();
+            },
+          });
+        },
+      });
+    },
+    { scope: containerRef },
+  );
 
   return (
     <div ref={containerRef} className="flex items-center justify-center gap-4">
@@ -65,15 +69,9 @@ export default function LogoMain() {
       />
 
       {/* text */}
-      <SplitText
-        textClassName="text-6xl font-mukta font-base"
-        animationDuration={0.5}
-        stagger={0.05}
-        delay={1}
-        ease="back.out"
-      >
+      <p id="logo" className="text-2xl font-semibold text-text md:text-4xl">
         LoneCatz
-      </SplitText>
+      </p>
     </div>
   );
 }

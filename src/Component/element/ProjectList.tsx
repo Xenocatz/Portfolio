@@ -2,10 +2,12 @@ export default function ProjectList({
   projectName,
   bgClass,
   active,
+  containerOffSet,
 }: {
   projectName: string;
   bgClass?: string;
   active?: boolean;
+  containerOffSet?: number;
 }) {
   return (
     <li className="flex flex-grow overflow-hidden">
@@ -15,9 +17,8 @@ export default function ProjectList({
         <h3 className="text-xl">{projectName}</h3>
       </div>
       <div
-        className={`w-2 ${
-          active ? `${bgClass}` : "bg-text/30"
-        } h-fill rounded-full`}
+        className={`w-2 ${active ? `${bgClass}` : "bg-text/30"} rounded-full`}
+        style={{ height: `${containerOffSet}%` }}
       />
     </li>
   );

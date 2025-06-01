@@ -8,7 +8,7 @@ export default function BgNightOcean() {
       <div className="absolute top-0 left-0 h-full w-full">
         <div className="relative h-full w-full brightness-90">
           <div
-            className="absolute top-0 left-0 h-full w-full bg-cover bg-no-repeat"
+            className="absolute top-0 left-0 h-[110%] w-full bg-cover bg-no-repeat"
             style={{
               backgroundImage: `url(${bgOcean})`,
               backgroundPosition: "center",
@@ -16,7 +16,8 @@ export default function BgNightOcean() {
           />
 
           <div
-            className="absolute top-0 left-0 h-full w-full bg-cover bg-no-repeat"
+            data-speed="clamp(0.8)"
+            className="absolute top-0 left-0 h-[110%] w-full bg-cover bg-no-repeat"
             style={{
               backgroundImage: `url(${moon})`,
               backgroundPosition: "center",
@@ -24,7 +25,7 @@ export default function BgNightOcean() {
           />
 
           <div
-            className="absolute top-0 left-0 h-full w-full bg-cover bg-no-repeat"
+            className="absolute top-0 left-0 h-[110%] w-full bg-cover bg-no-repeat"
             style={{
               backgroundImage: `url(${cloud})`,
               backgroundPosition: "center",
@@ -32,7 +33,8 @@ export default function BgNightOcean() {
           />
 
           <div
-            className="absolute top-0 left-0 h-full w-full bg-cover bg-no-repeat"
+            data-lag="clamp(0.05)"
+            className="absolute top-0 left-0 h-[110%] w-full bg-cover bg-no-repeat"
             style={{
               backgroundImage: `url(${moonLight})`,
               backgroundPosition: "center",

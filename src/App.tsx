@@ -1,56 +1,45 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import LogoMain from "./Component/Layout/LogoMain";
 import NavBar from "./Component/Layout/NavBar";
 import { Outlet } from "react-router";
 import gsap from "gsap";
 import ScrollTrigger from "gsap/ScrollTrigger";
-import { useScrollStore } from "./store/scrollStore";
-import ReactLenis, { LenisRef, useLenis } from "lenis/react";
+import { useGSAP } from "@gsap/react";
+import { ScrollSmoother } from "gsap/all";
 
-gsap.registerPlugin(ScrollTrigger);
+gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
 
 function App() {
-  const setLenis = useScrollStore((state) => state.setLenis);
-
   const [isIntro, setIsIntro] = useState(
     sessionStorage.getItem("intro") !== "false",
   );
-  // ref
-  const lenisRef = useRef<LenisRef | null>(null);
 
-  useLenis((lenis) => {
-    setLenis(lenis);
-  });
+  useGSAP(() => {
+    ScrollSmoother.create({
+      smooth: 1,
+      effects: true,
+    });
 
-  useEffect(() => {
     if (sessionStorage.getItem("intro") === null) {
       sessionStorage.setItem("intro", "true");
     }
 
-    function update(time: number) {
-      lenisRef.current?.lenis?.raf(time * 1000);
-    }
-
-    gsap.ticker.add(update);
-
+    if (!isIntro) return;
     gsap.to("#intro", {
       duration: 0.5,
       delay: 2.5,
       onComplete: () => {
         sessionStorage.setItem("intro", "false");
-        lenisRef.current?.lenis?.start();
         setIsIntro(false);
       },
     });
-
-    return () => gsap.ticker.remove(update);
   }, []);
 
   return (
     <>
-      <ReactLenis root options={{ autoRaf: false, lerp: 0.1 }} ref={lenisRef} />
-      <main className="relative bg-background">
-        <div className="relative">
+      {!isIntro && <NavBar />}
+      <main id="smooth-wrapper" className="relative overflow-hidden">
+        <div id="smooth-content" className="relative overflow-hidden">
           {isIntro ? (
             <div
               id="intro"
@@ -60,12 +49,12 @@ function App() {
             </div>
           ) : (
             <>
-              <NavBar />
               <Outlet />
             </>
           )}
         </div>
       </main>
+      <div className="fixed bottom-0 left-0 h-10 w-full bg-gradient-to-b from-transparent to-background"></div>
     </>
   );
 }

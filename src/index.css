@@ -115,33 +115,28 @@
     }
   }
   /*===================== animal */
-  /* cat */
-  .cat-idle {
-    background: url(./assets/cat-pixel/Idle.png) no-repeat;
+
+  .grabIcon-animation {
+    animation: grabIcon 1s ease-in-out infinite;
   }
-  /* squid */
-  .squid-idle {
-    background-image: url(./assets/pixel/squid/Idle.png);
-  }
-  /* fish */
-  .fish-idle {
-    background-image: url(./assets/pixel/fish/Idle.png);
-  }
-  .fish-walk {
-    background-image: url(./assets/pixel/fish/Walk.png);
-  }
-  /* dog */
-  .dog-idle {
-    background-image: url(./assets/pixel/dog/Idle.png);
-  }
-  .dog-attack {
-    background-image: url(./assets/pixel/dog/Attack.png);
+  @keyframes grabIcon {
+    0% {
+      transform: scale(1);
+      translate: 0px 0px;
+      rotate: 0deg;
+    }
+    50% {
+      transform: scale(1.1);
+      translate: 0px -5px;
+      rotate: 15deg;
+    }
+    100% {
+      transform: scale(1);
+      translate: 0px 0px;
+    }
   }
 }
 
-* {
-  scrollbar-gutter: stable;
-}
 *::-webkit-scrollbar {
   width: 5px;
   height: 10px;

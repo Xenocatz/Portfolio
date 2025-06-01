@@ -1,5 +1,4 @@
 import { Link, useLocation } from "react-router";
-import SplitText from "../element/SplitText";
 import { useRef } from "react";
 import gsap from "gsap";
 import { useGSAP } from "@gsap/react";
@@ -12,9 +11,9 @@ import {
   PersonStanding,
   Send,
 } from "lucide-react";
-import { ScrollTrigger } from "gsap/all";
+import { ScrollTrigger, SplitText } from "gsap/all";
 
-gsap.registerPlugin(useGSAP, ScrollTrigger);
+gsap.registerPlugin(useGSAP, ScrollTrigger, SplitText);
 
 export default function NavBar() {
   const iconRef = useRef<SVGSVGElement>(null);
@@ -23,93 +22,108 @@ export default function NavBar() {
   const listRef = useRef<HTMLUListElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
 
-  useGSAP(() => {
-    const tl = gsap.timeline();
-    tl.set(headerRef.current, { opacity: 0 })
-      .set(navRef.current, { opacity: 0.5, scaleX: 0 })
-      .set(buttonRef.current, { opacity: 0, y: 10 })
-      .to(headerRef.current, { opacity: 1 })
-      .addLabel("navItems")
-      .to(
-        navRef.current,
-        {
-          willChange: "opacity, transform",
-          opacity: 1,
-          scaleX: 1,
-          duration: 1,
-          ease: "back.inOut",
-        },
-        "navItems",
-      )
-      .fromTo(
-        listRef.current?.children || [],
-        {
-          opacity: 0,
-          y: 10,
-        },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          stagger: 0.1,
-          ease: "back.inOut",
-        },
-      )
-      .fromTo(
-        iconRef.current,
-        {
-          opacity: 0,
-          scale: 0.5,
-          x: 50,
-        },
-        {
-          opacity: 1,
-          duration: 0.5,
-          scale: 1,
+  useGSAP(
+    () => {
+      const tl = gsap.timeline();
+      tl.set(headerRef.current, { opacity: 0 })
+        .set(navRef.current, { opacity: 0.5, scaleX: 0 })
+        .set(buttonRef.current, { opacity: 0, y: 10 })
+        .to(headerRef.current, { opacity: 1 })
+        .addLabel("navItems")
+        .to(
+          navRef.current,
+          {
+            willChange: "opacity, transform",
+            opacity: 1,
+            scaleX: 1,
+            duration: 1,
+            ease: "back.inOut",
+          },
+          "navItems",
+        )
+        .fromTo(
+          listRef.current?.children || [],
+          {
+            opacity: 0,
+            y: 10,
+          },
+          {
+            opacity: 1,
+            y: 0,
+            duration: 1,
+            stagger: 0.1,
+            ease: "back.inOut",
+          },
+        )
+        .fromTo(
+          iconRef.current,
+          {
+            autoAlpha: 0,
+            y: 10,
+            scale: 0.5,
+          },
+          {
+            autoAlpha: 1,
+            y: -5,
+            scale: 1.2,
+            duration: 1.5,
+            ease: "back.inOut",
+          },
+          "navItems+=0.5",
+        )
+        .to(
+          iconRef.current,
+          {
+            y: 0,
+            scale: 1,
+            duration: 1.5,
+            ease: "back.inOut",
+          },
+          "navItems+=1",
+        )
+        .to(
+          buttonRef.current,
+          { opacity: 1, y: 0, duration: 1, ease: "back.out" },
+          "navItems+=1.9dcxxxxxxxxxxxxxxxxxxxxx",
+        );
 
-          ease: "power1.out",
+      SplitText.create("#logo", {
+        type: "chars",
+        autoSplit: true,
+        onSplit: (self) => {
+          gsap.from(self.chars, {
+            delay: 2.2,
+            opacity: 0,
+            y: 10,
+            duration: 0.5,
+            ease: "back.out",
+            stagger: 0.05,
+            onComplete: () => {
+              self.revert();
+            },
+          });
         },
-        "navItems+=0.5",
-      )
-      .to(iconRef.current, { x: 0, duration: 1, ease: "back.inOut" }, "<+=0.5")
-      .fromTo(
-        iconRef.current,
-        {
-          rotate: -120,
-        },
-        {
-          rotate: 0,
-          duration: 2.5,
-          ease: "back.out",
-        },
-        "navItems+=0.5",
-      )
-      .to(
-        buttonRef.current,
-        { opacity: 1, y: 0, duration: 1, ease: "back.out" },
-        "navItems+=1.9dcxxxxxxxxxxxxxxxxxxxxx",
-      );
-  }, []);
+      });
+    },
+    { scope: headerRef },
+  );
 
   return (
     <>
       <header
         ref={headerRef}
-        className="from-darkbg via-darkbg/30 fixed top-0 left-0 z-9999 w-full bg-linear-to-b to-transparent font-mukta"
+        className="fixed top-0 left-0 z-9999 w-full overflow-hidden bg-linear-to-b from-background via-background/30 to-transparent font-mukta"
       >
         <div className="flex items-center justify-between px-5 py-2">
           {/* logo */}
           <div className="flex flex-1 items-center justify-start md:gap-2">
             <Cat ref={iconRef} className="relative h-10 w-10 text-shineText" />
-            <SplitText
-              textClassName="md:text-2xl text-xl font-mukta font-base"
-              animationDuration={0.5}
-              stagger={0.05}
-              delay={1.9}
-              ease="back.out"
+            <p
+              id="logo"
+              className="text-lg font-semibold text-text md:text-2xl"
             >
               LoneCatz
-            </SplitText>
+            </p>
           </div>
           {/* nav md++ */}
           <nav
